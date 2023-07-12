@@ -1,7 +1,6 @@
-<template>
-    <div></div>
+<template>    
     <footer class="d-flex border align-items-center colorfooter">
-      <div class="text-black-80 text-left ps-5 gap-3 w-75">
+      <div class="text-black-80 text-left ps-5 gap-3 w-75 colorletras">
         &#169; 2023 PEÑASCAL TRUKE All rights reserved. Designed by ArchiTech
       </div>
       <div class="redes-container d-flex justify-content-sm-end pe-5 gap-3 w-100 pb-3 mt-3">
@@ -17,11 +16,15 @@
 </script>
   
   <style scoped>
+  
   .redes-container {
     height: 50px;
   }
   /* padding: 0.4rem; */
   .colorfooter {
-    background-color: #5FC74B;
+    background-color:#1ab188;
+  }
+  .colorletras{
+    color: white;
   }
   </style>
