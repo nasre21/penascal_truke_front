@@ -1,7 +1,4 @@
 <template>
- 
-</template>
-<template>
  <div class="container-fluid py-2 mb-4 mt-4">
     <div class="d-flex flex-row flex-nowrap">
         <div class="card card-body">
