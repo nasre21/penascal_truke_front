@@ -22,7 +22,7 @@
       <router-link to="/">
       <a class="navbar-brand mt-2 mt-lg-0" href="#">
          <img
-          src="../../assets/imgg/Logo2.png"
+          src="../../assets/imgg/Logo4.png"
           height="80"
           alt="MDB Logo"
           loading="lazy"
@@ -32,10 +32,10 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <router-link to="/sobreNosotros" class="nav-link"> Sobre Nosotros </router-link>
+          <router-link to="/sobreNosotros" class="nav-link colorletra"> Sobre Nosotros </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/logIn" class="nav-link" >Log In</router-link>          
+          <router-link to="/logIn" class="nav-link colorletra" >Log In</router-link>          
         </li>
       </ul>
       <!-- Left links -->
@@ -91,8 +91,13 @@
 
 
 <style scoped>
+*{
+  color: white;
+}
 .colorNavbar{
-  background-color: #5FC74B;
-
+  background-color:#1ab188;
+}
+.colorletra{
+  color: white;
 }
 </style>
