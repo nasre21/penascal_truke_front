@@ -37,6 +37,9 @@
         <li class="nav-item">
           <router-link to="/logIn" class="nav-link colorletra" >Log In</router-link>          
         </li>
+        <li class="nav-item">
+          <router-link to="/Usuario" class="nav-link colorletra" >Usuario</router-link>          
+        </li>
       </ul>
       <!-- Left links -->
     </div>

@@ -129,28 +129,14 @@ onMounted(intercambiarColores);
 
 </script>
 
-<style>
+<style scoped >
 /* Estilos para el encabezado */
-header {
-  background-color: #333;
-  padding: 20px;
-  color: #fff;
-}
 
 body {
-  background: #c1bdba;
+  
   font-family: "Ubuntu", helvetica;
 }
 
-a {
-  text-decoration: none;
-  color: #1ab188;
-  transition: 0.5s ease;
-}
-
-a:hover {
-  color: #159f80;
-}
 
 .contenedor-formularios {
   background: rgba(19, 35, 47, 0.9);
@@ -321,6 +307,9 @@ input:focus {
     font-size: 1.5rem;
     
 }
+.tab-primera button {
+    background-color: gray;
+}
 
 /* Mediaqueries */
 @media screen and (max-width: 500px) {
@@ -339,9 +328,7 @@ input:focus {
   }
 }
 
-.tab-primera button {
-    background-color: gray;
-}
+
 
 </style>
 

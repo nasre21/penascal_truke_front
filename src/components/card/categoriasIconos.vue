@@ -11,7 +11,7 @@
         </div>
         <div class="card card-body">
             <i class="fa-solid fa-mobile-screen-button fa-2xl"></i>
-            <spam class="pt-4">Moviles/Technologia</spam>
+            <spam class="pt-4">Moviles / Tecnologia</spam>
         </div>
     </div>
 </div>
