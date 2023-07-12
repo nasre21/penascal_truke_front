@@ -27,4 +27,7 @@
   .colorletras{
     color: white;
   }
+  svg{
+    fill: white;
+  }
   </style>
