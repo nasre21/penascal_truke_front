@@ -34,6 +34,7 @@
   
   <script setup>
   import { ref } from 'vue';
+  import axios from 'axios';
   
   const nombre = ref('');
   const descripcion = ref('');
@@ -44,10 +45,24 @@
   function handleFileUpload(event) {
     const file = event.target.files[0];
     if (file) {
-      foto.value = file;
-    }
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+    foto.value = e.target.result; // Obtener los datos de la imagen como base64
+
+  // Enviar los datos de la imagen al servidor
+  axios.post('/guardar-imagen', { foto })
+    .then(response => {
+      // Manejar la respuesta del servidor
+      console.log(response.data);
+    })
+    .catch(error => {
+      // Manejar errores
+      console.error(error);
+    });
+};
   }
-  
+}
   function submitForm(event) {
     event.preventDefault();
   
