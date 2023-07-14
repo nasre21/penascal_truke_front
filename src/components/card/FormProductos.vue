@@ -1,6 +1,6 @@
 <template>
     <div class="product-form justify-content-around shadow-box">
-      <form @submit="submitForm" class="d-flex">
+      <form @submit.prevent class="d-flex">
         <div class="form-column">
           <div class="form-group">
             <!-- <label for="nombre">Nombre</label> -->
@@ -25,7 +25,7 @@
             <input type="number" id="precio" v-model="precio" placeholder="Precio" required>
           </div>
           <div class="form-actions">
-            <button type="submit">Enviar</button>
+            <button type="submit" @click="createProducto">Enviar</button>
           </div>
         </div>
       </form>
@@ -39,35 +39,31 @@
   const nombre = ref('');
   const descripcion = ref('');
   const foto = ref(null);
-  const vendedor = ref('');
   const precio = ref('');
   
   function handleFileUpload(event) {
     const file = event.target.files[0];
+    print("esta es la imagen ",file)
     if (file) {
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-    foto.value = e.target.result; // Obtener los datos de la imagen como base64
-
-        // Enviar los datos de la imagen al servidor
-        axios.post('/guardar-imagen', { foto })
-          .then(response => {
-            // Manejar la respuesta del servidor
-            console.log(response.data);
-          })
-          .catch(error => {
-            // Manejar errores
-            console.error(error);
-          });
-      };
-        }
-}
-  function submitForm(event) {
-    event.preventDefault();
-  
-    // Aquí puedes agregar la lógica para enviar el formulario
+      foto.value = file;
   }
+}
+const createProducto = () => {
+  try {
+    axios.post("http://127.0.0.1:5000/createproduct", {
+      name: nombre.value,
+      description: descripcion.value,
+      photo: foto.value,
+      price: precio.value      
+    })
+  
+   
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
   </script>
   
   <style>
