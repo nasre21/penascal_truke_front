@@ -8,49 +8,77 @@
         class="card-img-top"
         alt="${datosLeidos.titulo}"
       />
-      <div class="card-body">
-        <div class="d-flex justify-content-around flex-wrap pt-4">
-         <!-- <button class="boton_comprar btn btn-dark col-sm-4" type="button">
-            Comprar
-          </button>
-          <button class="boton_añadir btn btn-dark col-sm-4 agregar-carrito" type="button">
-            Añadir al carrito
-          </button>-->
-        </div>
-      </div>
+      
     </div>
+ 
     <!-- -----------caja 2---------- -->
     <div class="card col-lg-6 col-sm-12">
       <div class="p-5 card">
         <h1><strong>${datosLeidos.titulo}</strong></h1>
         <p>${datosLeidos.titulo}</p>
         
-        <div>
-          <span class="my-3 h3">${datosLeidos.precio} &nbsp;</span
-          ><span class="text-danger text-decoration-line-through"
-            >444,99</span
-          >
-        </div>
+       
       </div>
       <div class="container_hombre d-flex justify-content-around flex-wrap mt-5">
 
-        <button class="talla border border-dark col-2 text-center">
-          EU 40
+        <button class="botonComprar">
+          Comprar
         </button>
-        <button class="talla border border-dark col-2 text-center">
-          EU 41
-        </button>
-        <button class="talla border border-dark col-2 text-center">
-          EU 42
-        </button>
-        <button class="talla border border-dark col-2 text-center">
-          EU 43
-        </button>
+        
       </div>
       
     </div>
+    <div class="vistaPequeña d-flex">
+        <div class="contenedorMiniFoto" >
+          <img src="../../assets/imgg/Logo2.png" alt="">
+        </div>
+        <div class="contenedorMiniFoto" >
+          <img src="../../assets/imgg/Logo2.png" alt="">
+        </div>
+        <div class="contenedorMiniFoto" >
+          <img src="../../assets/imgg/Logo2.png" alt="">
+        </div>
+        
+      </div>
+</div>
+<div class="margen" >
+  <!-- margen -->
 </div>
 </template>
+
+<script setup >
+import
+
+</script>
+
+  <style scoped >
+  .margen{
+    margin-bottom: 1rem;
+  }
+  .contenedorMiniFoto{
+    border: solid 1px rgba(128, 128, 128, 0.263);
+    
+  }
   
+  img{
+    width: 6em;
+  }
+  .vistaPequeña{
+    border: solid 1px rgba(128, 128, 128, 0.263)  ;
+    /* width: 90rem; */
+  }
+.botonComprar{
+  width: 10rem;  
+  border: 0;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 15px 0;
+  font-size: 2rem;
+  background: #1ab188;
+  color: #fff;
+  transition: all 0.5s ease;
+}
+</style>
     
   
