@@ -104,7 +104,9 @@ const createProducto = async () => {
   } catch (error) {
     console.log(error);
   }
+  location.reload();
 }
+
 
 
   </script>
