@@ -6,7 +6,11 @@
         <categoriasIconos />
     </div>
     <div>
-        <CatalogoImagines :dataInfo = "dataInfo"/>
+        <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
+        <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
+        <div v-if="!dataInfo.isError && !isLoading">
+            <CatalogoImagines :dataInfo = "dataInfo"/>
+        </div>
     </div>
     <div>
         <footerFront />
@@ -21,19 +25,22 @@ import categoriasIconos from "@/components/card/categoriasIconos.vue"
 import CatalogoImagines from "@/components/card/CatalogoImagines.vue"
 import footerFront from "@/components/Navbar/footerFront.vue"
 
-import info from "@/dataInfo/getProduc.js"
+import info from "@/dataInfo/getProduc"
 
 
 import { ref, onMounted } from 'vue';
 
 let isLoading = ref(true) 
 
-let dataInfo = ref(onMounted(async () => {
+let dataInfo = ref(onMounted(
+    async () => {
     dataInfo.value = await info.getProduct()
     if( !dataInfo.value.isLoading){
       isLoading.value = false
     }
 
 }))
+
+console.log(dataInfo);
 
 </script>
