@@ -1,5 +1,5 @@
 <template>   
-
+<div v-for="info in dataInfo.data" :key="info.id" >
 <div class="container d-flex mt-2 flex-wrap">
     <!-- -----------caja 1---------- -->
     <div class="card col-lg-6 col-sm-12">
@@ -14,8 +14,8 @@
     <!-- -----------caja 2---------- -->
     <div class="card col-lg-6 col-sm-12">
       <div class="p-5 card">
-        <h1><strong>${datosLeidos.titulo}</strong></h1>
-        <p>${datosLeidos.titulo}</p>
+        <h2><strong>${info.}</strong></h2>
+        <p>${info.}</p>
         
        
       </div>
@@ -44,10 +44,15 @@
 <div class="margen" >
   <!-- margen -->
 </div>
+</div>
 </template>
 
 <script setup >
-import
+import {defineProps} from 'vue';
+
+defineProps({
+  dataInfo: Object
+})
 
 </script>
 
