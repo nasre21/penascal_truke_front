@@ -1,18 +1,37 @@
 <template>
-   <div class="shadow-box" >
+   <div class="shadow-box" v-for="data in dataInfo.data" :key="data.id">
         <div class="personal-info ms-5">
         <h2>Datos personales</h2>
         <div class="personal-details">
             <img class="avatar" src="../../assets/imgg/pngwing.com.png" alt="Avatar">
             <div class="info">
-            <h5>{{ nombre }}</h5>
-            <p>{{ direccion }}</p>
-            <p>User</p>
+
+            <h5><strong>Nombre</strong>: {{ data.firstname }}</h5>
+            
+            <p><strong>Apellido</strong>:  {{ data.lastname }}</p>
+
+            <p><strong>Sector</strong>:  {{ data.sector }}</p>
+
+            <p><strong>E-mail</strong>:  {{ data.email }}</p>
+
+            <p><strong>Telefono</strong>:  {{ data.phone }}</p>
+
+            <p><strong>Penascales</strong>:  {{ data.penascales }}</p>
+            
             </div>
         </div>
         </div>
     </div>
   </template>
+
+  <script setup>
+  import { defineProps } from "vue";
+
+  defineProps({
+    dataInfo: Object
+  })
+
+</script>
   
   <style scoped>
   .shadow-box{
@@ -20,7 +39,7 @@
     margin-bottom: 2rem;
     margin-top: 2rem;
     width: 27rem;
-      height: 12rem;
+      height: 18rem;
       background-color: #ffffff;
       box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
       

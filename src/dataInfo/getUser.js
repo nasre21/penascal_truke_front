@@ -10,7 +10,7 @@ async function getUser(){
 
       try {
         let answer = await axios.get("http://127.0.0.1:5000/users")
-        data.value = answer.data
+        data.value = await answer.data
       }
       catch (err) {
         isError = true
@@ -21,3 +21,5 @@ async function getUser(){
 }
 
 export default {getUser}
+
+
