@@ -47,6 +47,8 @@
       foto.value = file;
     }
   }
+
+ 
   
   function submitForm(event) {
     event.preventDefault();
