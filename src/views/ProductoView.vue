@@ -1,7 +1,9 @@
-<template>
+<template>ç
+<div>
    <navBar />
  <CardProducto />
  <footerFront />
+</div>
 </template>
 
 <script setup> 

@@ -1,6 +1,6 @@
 <template>
     <div class="product-form justify-content-around shadow-box">
-      <form @submit="submitForm" class="d-flex">
+      <form @submit.prevent="createProducto" class="d-flex">
         <div class="form-column">
           <div class="form-group">
             <!-- <label for="nombre">Nombre</label> -->
@@ -12,7 +12,7 @@
           </div>
           <div class="form-group">
             <!-- <label for="foto">Foto:</label> -->
-            <input type="file" id="foto" accept="image/*" @change="handleFileUpload" required>
+            <input type="file" id="foto" ref="fileInput" multiple @change="handleFiles($event)">
           </div>
         </div>
         <div class="form-column">
@@ -24,8 +24,16 @@
             <!-- <label for="precio">Precio:</label> -->
             <input type="number" id="precio" v-model="precio" placeholder="Precio" required>
           </div>
+          <div class="form-group">
+            <!-- <label for="Category">Escoge una Categoria:</label> -->
+            <select v-model="category" id="category">
+              <option value="Ropa y Accesorios" selected>Ropa y Accesorios</option>
+              <option value="Videojuegos">Videojuegos</option>
+              <option value="Moviles y Technologias">Moviles y Technologias</option>
+            </select>
+          </div>
           <div class="form-actions">
-            <button type="submit">Enviar</button>
+            <button type="submit" >Enviar</button>
           </div>
         </div>
       </form>
@@ -33,28 +41,74 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
-  
-  const nombre = ref('');
-  const descripcion = ref('');
-  const foto = ref(null);
-  const vendedor = ref('');
-  const precio = ref('');
-  
-  function handleFileUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-      foto.value = file;
-    }
-  }
+import { ref, resolveTransitionHooks } from 'vue';
+import axios from 'axios';  
 
- 
-  
-  function submitForm(event) {
-    event.preventDefault();
-  
-    // Aquí puedes agregar la lógica para enviar el formulario
+const fileInput = ref(null)
+
+const nombre = ref('');
+const descripcion = ref('');
+const category = ref('');
+const precio = ref('');
+const vendedor = ref('');
+
+let jsonData = ref(null)
+
+const handleFiles = (event) => {
+  const files = event.target.files;
+  if (files.length === 0) {
+    console.log("No files");
+    return;
   }
+  const photosData = []
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const photoData = {
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        dataURL: event.target.result
+      }
+      photosData.push(photoData);
+
+      if (photosData.length === files.length) {
+        const dataToSave = {
+          photos: photosData
+        }
+
+        jsonData.value = JSON.stringify(dataToSave);
+        console.log("imagenes guardadas", jsonData)
+    }
+  };
+  reader.readAsDataURL(file);
+}
+};
+
+const createProducto = async () => {
+
+  const files = fileInput.value.files
+
+  try {
+   await axios.post("http://127.0.0.1:5000/createproduct", {
+      name: nombre.value,
+      description: descripcion.value,
+      price: precio.value,
+      category: category.value,
+      userid: vendedor.value,
+      files: jsonData.value
+    });
+    console.log('description', descripcion.value);
+  } catch (error) {
+    console.log(error);
+  }
+  location.reload();
+}
+
+
+
   </script>
   
   <style>
