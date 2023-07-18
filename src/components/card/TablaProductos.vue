@@ -58,6 +58,7 @@ let isError = ref(false)
   // Delete Product
    const borrarProducto = async(idproduct) => {
     idProduct.value = idproduct
+    console.log("idProduct", idProduct.value)
     try {
            await axios.delete(`http://127.0.0.1:5000/product/${idproduct}`)
             location.reload()
