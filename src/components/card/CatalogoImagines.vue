@@ -3,15 +3,11 @@
     <div class="row">
       <div class="col-md-4" v-for="data in dataInfo.data" :key="data.id">
         <div class="card card_all">
-          <!-- Mostrar las imágenes -->
-          <div v-for="file in parseFiles(data.files)" :key="file.id">
-            <img :src="file.url" alt="Imagen del producto" />
-          </div>
-
+          <img :src="parseFirstFile(data.files)" alt="Imagen del producto" />
           <div class="card-body d-flex justify-content-around">
             <h5 class="card-title">{{ data.name }}</h5>
             <p>{{ data.price }} Peñascales</p>
-            <a href="" class="btn btn-outline-success btn-sm">Accede al producto</a>
+            <a class="btn btn-outline-success btn-sm" @click="keepIdProduct(data.idproduct )">Accede al producto</a>
           </div>
         </div>
       </div>
@@ -20,24 +16,38 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, defineEmits  } from 'vue';
 
 const { dataInfo } = defineProps(['dataInfo']);
 
-function parseFiles(filesString) {
+const emit = defineEmits(['productoSeleccionado'])
+
+function parseFirstFile(filesString) {
   try {
     const filesArray = JSON.parse(filesString);
-    return filesArray.map((url, id) => ({ url, id }));
+    if (Array.isArray(filesArray) && filesArray.length > 0) {
+      return filesArray[0];
+    }
+    return '';
   } catch (error) {
     console.error("Error al analizar los archivos:", error);
-    return [];
+    return '';
   }
 }
+
+function keepIdProduct(idProducto) {
+  console.log("esto es producto value", idProducto);
+  emit('productoSeleccionado', idProducto);
+}
+
+
 </script>
-
-
 
 <style scoped>
 
+img{
+  width:100px;
+  height: 70px;
+}
 
 </style>

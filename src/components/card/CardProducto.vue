@@ -29,15 +29,9 @@
       
     </div>
     <div class="vistaPequeña d-flex">
-        <div class="contenedorMiniFoto" >
-          <img src="../../assets/imgg/Logo2.png" alt="">
-        </div>
-        <div class="contenedorMiniFoto" >
-          <img src="../../assets/imgg/Logo2.png" alt="">
-        </div>
-        <div class="contenedorMiniFoto" >
-          <img src="../../assets/imgg/Logo2.png" alt="">
-        </div>
+      <div v-for="file in parseFiles(data.files)" :key="file.id">
+            <img :src="file.url" alt="Imagen del producto" />
+          </div> 
         
       </div>
 </div>
@@ -48,11 +42,35 @@
 </template>
 
 <script setup >
-import {defineProps} from 'vue';
 
-defineProps({
-  dataInfo: Object
-})
+async function getOneProduct(idproduct){
+    let isError = false;
+    let isLoading = true;
+    let data = ref('')
+
+      try {
+        let response = await axios.get(`http://127.0.0.1:5000/product/${idproduct}`)
+        data.value = await response.data
+        console.log("esta es la data de js", data.value)      
+      }
+      catch (err) {
+        isError = true
+      }
+
+      isLoading = false;
+
+      return {isError, isLoading, data}
+}
+
+ function parseFiles(filesString) {
+   try {
+     const filesArray = JSON.parse(filesString);
+     return filesArray.map((url, id) => ({ url, id }));
+   } catch (error) {
+     console.error("Error al analizar los archivos:", error);
+     return [];
+   }
+ }
 
 </script>
 

@@ -29,7 +29,7 @@
             <select v-model="category" id="category">
               <option value="Ropa y Accesorios" selected>Ropa y Accesorios</option>
               <option value="Videojuegos">Videojuegos</option>
-              <option value="Moviles y Technologias">Moviles y Technologias</option>
+              <option value="Moviles y Tecnologias">Moviles y Tecnologias</option>
             </select>
           </div>
           <div class="form-actions">
@@ -92,7 +92,7 @@ const filePromises = imageFiles.value.map(file => {
 
     console.log(response.data);
     // Recargar la página si es necesario
-    // location.reload();
+    location.reload();
   } catch (error) {
     console.error('Error al crear el producto:', error.message);
   }
