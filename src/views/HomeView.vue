@@ -38,7 +38,6 @@ let dataInfo = ref(onMounted(
     if( !dataInfo.value.isLoading){
       isLoading.value = false
     }
-
 }))
 
 console.log(dataInfo);
