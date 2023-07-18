@@ -9,7 +9,7 @@
           <th>Nombre</th>
           <th>Descripción</th>
           <th>Precio</th>
-          <th>Acciones</th>
+         
         </tr>
       </thead>
       <tbody>
@@ -18,10 +18,7 @@
           <td data-label="Nombre">{{ product.nombre }}</td>
           <td data-label="Descripción">{{ product.descripcion }}</td>
           <td data-label="Precio">{{ product.precio }}</td>
-          <td data-label="Acciones">
-            <span @click="editarProducto(index)"><i class="fas fa-edit"></i></span>
-            <span @click="borrarProducto(index)"><i class="fas fa-trash"></i></span>
-          </td>
+          
         </tr>
       </tbody>
     </table>
@@ -38,7 +35,7 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Precio</th>
-            <th>Acciones</th>
+           
           </tr>
         </thead>
         <tbody>
@@ -47,10 +44,7 @@
             <td>{{ product.nombre }}</td>
             <td>{{ product.descripcion }}</td>
             <td>{{ product.precio }}</td>
-            <td>
-              <span @click="editarProducto(index)"><i class="fas fa-edit"></i></span>
-              <span @click="borrarProducto(index)"><i class="fas fa-trash"></i></span>
-            </td>
+            
           </tr>
         </tbody>
       </table>
@@ -86,7 +80,7 @@
   }
   </script>
   
-  <style>
+  <style>  
 
   
   .todo {
