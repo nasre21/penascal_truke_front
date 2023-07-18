@@ -6,17 +6,14 @@
         <!-- <img v-for="photo in data.files.photos" :key="photo.name" :src="photo.dataURL" alt="" class="card-img-top"> -->
         <div class="card-body d-flex justify-content-around">
           <h5 class="card-title">{{ data.name }}</h5>
-          <a href="" class="btn btn-outline-success btn-sm">Read More</a>
-          <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+          <p>{{ data.price }} Peñascales</p>
+          <a href="" class="btn btn-outline-success btn-sm" >Accede al producto</a>
         </div>
       </div>
       {{ data.files }}
     </div>
   </div>
 </div>
-
-
-
 </template>
 
 <script setup>
