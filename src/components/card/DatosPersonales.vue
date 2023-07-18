@@ -1,22 +1,26 @@
 <template>
-    <div>
-        <navBar />
-    </div>
-    <div class="personal-info ms-5">
+    <div class="personal-info ms-5" >
       <h2>Datos personales</h2>
-      <div class="personal-details">
+      <div class="personal-details" v-for="data in dataAdmin.data" :key="data.id">
         <img class="avatar" src="../../assets/imgg/pngwing.com.png" alt="Avatar">
         <div class="info">
-          <h5>{{ nombre }}</h5>
-          <p>{{ direccion }}</p>
-          <p>Admin</p>
+          <h5></h5>
+          <p>{{ data.email }}</p>
+          <p>{{ data.name }}</p>
         </div>
       </div>
     </div>
-    <div>
-        <footerFront />
-    </div>
   </template>
+
+  <script setup>
+import { defineProps } from 'vue';
+
+defineProps({
+  dataAdmin: Object
+});
+
+
+</script>
   
   <style scoped>
   .personal-info {
