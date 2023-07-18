@@ -40,47 +40,41 @@
             <!-- Registrarse -->
             <div id="registrarse">
                 <h1>Registrarse</h1>
-                <form action="#" method="post">
+                <form @submit.prevent="createUsuario" action="#" method="post" >
                     <div class="fila-arriba">
                         <div class="contenedor-input">
                             <label>
                                 Nombre <span class="req">*</span>
                             </label>
-                            <input type="text" required >
+                            <input type="text" v-model="nombre" required >
                         </div>
 
                         <div class="contenedor-input">
                             <label>
                                 Apellido <span class="req">*</span>
                             </label>
-                            <input type="text" required>
+                            <input type="text" v-model="apellido" required>
                         </div>
                     </div>
                     <div class="contenedor-input">
                         <label>
-                            Usuario <span class="req">*</span>
+                            Sector <span class="req">*</span>
                         </label>
-                        <input type="text" required>
+                        <input type="text" v-model="sector" required>
                     </div>
                     <div class="contenedor-input">
                             <label>
                                 Email <span class="req">*</span>
                             </label>
-                        <input type="email" required>
+                        <input type="email" v-model="email" required>
                     </div>
                     <div class="contenedor-input">
                         <label>
                             Contraseña <span class="req">*</span>
                         </label>
-                        <input type="password" required>
+                        <input type="password" v-model="password" required>
                     </div>
 
-                    <div class="contenedor-input">
-                        <label>
-                            Repetir Contraseña <span class="req">*</span>
-                        </label>
-                        <input type="password" required>
-                    </div>
 
                     <input type="submit" class="button button-block" value="Registrarse">
                 </form>
@@ -91,6 +85,33 @@
 </template>
 <script setup>
 import { onMounted } from 'vue';
+import { ref, resolveTransitionHooks } from 'vue';
+import axios from 'axios';  
+
+const nombre = ref('');
+const apellido = ref('');
+const sector = ref('');
+const email = ref('');
+const password = ref('');
+
+
+const createUsuario = async () => {
+
+try {
+ await axios.post("http://127.0.0.1:5000/register", {
+    firstname: nombre.value,
+    lastname: apellido.value,
+    sector: sector.value,
+    email: email.value,
+    password: password.value,
+    
+  });
+  console.log('name', nombre.value);
+} catch (error) {
+  console.log(error);
+}
+// location.reload();
+}
 
 const changeForm = (target) => {
   const tabContents = document.querySelectorAll('.contenido-tab > div');
