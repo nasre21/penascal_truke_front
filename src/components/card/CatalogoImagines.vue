@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4" v-for="data in dataInfo.data" :key="data.id">
       <div class="card card_all">
-        <!-- <img v-for="photo in data.files.photos" :key="photo.name" :src="photo.dataURL" alt="" class="card-img-top"> -->
+        <!-- <img v-if="data.files && data.files.dataURL.length > 0" :src="data.files.dataURL" alt="" class="card-img-top"> -->
         <div class="card-body d-flex justify-content-around">
           <h5 class="card-title">{{ data.name }}</h5>
           <p>{{ data.price }} Peñascales</p>
