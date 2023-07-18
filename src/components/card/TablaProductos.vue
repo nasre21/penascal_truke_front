@@ -1,6 +1,7 @@
 <template>
+  <!-- Product table Start-->
     <div class="product-table todo">
-      <table>
+      <table >
         <thead>
           <tr>
             <th>Foto</th>
@@ -10,12 +11,12 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="(product, index) in products" :key="index">
-            <td><img :src="product.foto" alt="Foto del producto"></td>
-            <td>{{ product.nombre }}</td>
-            <td>{{ product.descripcion }}</td>
-            <td>{{ product.precio }}</td>
+        <tbody v-for="data in dataInfo.data" :key="data.id">
+          <tr>
+            <td><img src="" alt="Foto del producto"></td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.description }}</td>
+            <td>{{ data.price }}</td>
             <td>
               <span @click="editarProducto(index)"><i class="fas fa-edit"></i></span>
               <span @click="borrarProducto(index)"><i class="fas fa-trash"></i></span>
@@ -24,35 +25,25 @@
         </tbody>
       </table>
     </div>
+     <!-- Product table End-->
   </template>
   
   <script setup>
-  import { ref } from 'vue';
-  
-  const products = ref([
-    {
-      foto: 'ruta/a/foto1.jpg',
-      nombre: 'Producto 1',
-      descripcion: 'Descripción del producto 1',
-      precio: 10.99
-    },
-    {
-      foto: 'ruta/a/foto2.jpg',
-      nombre: 'Producto 2',
-      descripcion: 'Descripción del producto 2',
-      precio: 19.99
-    },
-    // Agrega más productos aquí
-  ]);
-  
-  function editarProducto(index) {
-    // Lógica para editar el producto seleccionado
+ 
+import {defineProps} from 'vue'
+
+
+defineProps({
+    dataInfo: Object
+  })
+
+  const editarProducto = (index) => {
+    console.log(index)
   }
-  
-  function borrarProducto(index) {
-    // Lógica para borrar el producto seleccionado
+  const borrarProducto = (index) => {
+    console.log(index)
   }
-  </script>
+</script>
   
   <style>
   .todo {
