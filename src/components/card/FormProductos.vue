@@ -41,7 +41,7 @@
   </template>
   
   <script setup>
-import { ref, resolveTransitionHooks } from 'vue';
+import { ref } from 'vue';
 import axios from 'axios';  
 
 const fileInput = ref(null)
