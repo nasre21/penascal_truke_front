@@ -1,7 +1,14 @@
 <template>
     <navBar />
     <DatosPersonales />  
-    <TablaProductos />
+    <div>
+        <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
+        <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
+        <div>
+            <TablaProductos :dataInfo = "dataInfo"/>
+        </div>
+    </div>
+    
     <FormProductos />
     <TablaUsuario />
    <footerFront />
@@ -14,6 +21,26 @@ import TablaProductos from "@/components/card/TablaProductos.vue"
 import footerFront from "@/components/Navbar/footerFront.vue"
 import TablaUsuario from "@/components/card/TablaUsuario.vue"
 import FormProductos from "@/components/card/FormProductos.vue"
+
+// dataInfo
+
+import info from "@/dataInfo/getProduc"
+
+import { ref, onMounted } from 'vue';
+
+let isLoading = ref(true) 
+
+let dataInfo = ref(onMounted(
+    async () => {
+    dataInfo.value = await info.getProduct()
+    if( !dataInfo.value.isLoading){
+      isLoading.value = false
+    }
+
+}))
+
+
+
 
 
 </script>
