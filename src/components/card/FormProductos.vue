@@ -29,7 +29,7 @@
             <select v-model="category" id="category">
               <option value="Ropa y Accesorios" selected>Ropa y Accesorios</option>
               <option value="Videojuegos">Videojuegos</option>
-              <option value="Moviles y Technologias">Moviles y Technologias</option>
+              <option value="Moviles y Tecnologias">Moviles y Tecnologias</option>
             </select>
           </div>
           <div class="form-actions">
@@ -41,71 +41,62 @@
   </template>
   
   <script setup>
-import { ref, resolveTransitionHooks } from 'vue';
+import { ref } from 'vue';
 import axios from 'axios';  
 
-const fileInput = ref(null)
+
 
 const nombre = ref('');
 const descripcion = ref('');
 const category = ref('');
 const precio = ref('');
 const vendedor = ref('');
+const  imageFiles = ref([]);
 
-let jsonData = ref(null)
 
 const handleFiles = (event) => {
   const files = event.target.files;
-  if (files.length === 0) {
-    console.log("No files");
-    return;
-  }
-  const photosData = []
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      const photoData = {
-        name: file.name,
-        type: file.type,
-        size: file.size,
-        dataURL: event.target.result
-      }
-      photosData.push(photoData);
-
-      if (photosData.length === files.length) {
-        const dataToSave = {
-          photos: photosData
-        }
-
-        jsonData.value = JSON.stringify(dataToSave);
-        console.log("imagenes guardadas", jsonData)
-    }
-  };
-  reader.readAsDataURL(file);
-}
+  imageFiles.value = Array.from(files);
+  console.log('description', imageFiles.value);
 };
 
 const createProducto = async () => {
-
-  const files = fileInput.value.files
+// Crear una matriz de promesas para cargar los archivos
+const filePromises = imageFiles.value.map(file => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        // Obtener los datos del archivo leído
+        const fileData = event.target.result;
+        resolve(fileData);
+      };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+      reader.readAsDataURL(file); // Leer el archivo como una URL de datos
+    });
+  });
 
   try {
-   await axios.post("http://127.0.0.1:5000/createproduct", {
+    // Esperar a que todas las promesas de carga de archivos se resuelvan
+    const filesData = await Promise.all(filePromises);
+
+    const response = await axios.post('http://127.0.0.1:5000/createproduct', {
       name: nombre.value,
       description: descripcion.value,
       price: precio.value,
       category: category.value,
-      userid: vendedor.value,
-      files: jsonData.value
+      iduser: vendedor.value,
+      files: filesData, // Usar los datos cargados en lugar de imageFiles.value
     });
-    console.log('description', descripcion.value);
+
+    console.log(response.data);
+    // Recargar la página si es necesario
+    location.reload();
   } catch (error) {
-    console.log(error);
+    console.error('Error al crear el producto:', error.message);
   }
-  location.reload();
-}
+};
 
 
 

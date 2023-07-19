@@ -18,19 +18,19 @@
             <!-- Iniciar Sesion -->
             <div id="iniciar-sesion">
                 <h1>Iniciar Sesión</h1>
-                <form action="#" method="post">
+                <form @submit.prevent="iniciarSesion" action="#" method="post">
                     <div class="contenedor-input">
                         <label>
-                            Usuario <span class="req">*</span>
+                            Email <span class="req">*</span>
                         </label>
-                        <input type="text" required>
+                        <input v-model="user_email" type="text" required>
                     </div>
 
                     <div class="contenedor-input">
                         <label>
                             Contraseña <span class="req">*</span>
                         </label>
-                        <input type="password" required>
+                        <input v-model="user_password" type="password" required>
                     </div>
                     <!-- <p class="forgot"><a href="#">Se te olvidó la contraseña?</a></p> -->
                     <input type="submit" class="button button-block" value="Iniciar Sesión">
@@ -40,47 +40,50 @@
             <!-- Registrarse -->
             <div id="registrarse">
                 <h1>Registrarse</h1>
-                <form action="#" method="post">
+                <form @submit.prevent="createUsuario" action="#" method="post" >
                     <div class="fila-arriba">
                         <div class="contenedor-input">
                             <label>
                                 Nombre <span class="req">*</span>
                             </label>
-                            <input type="text" required >
+                            <input type="text" v-model="nombre" required >
                         </div>
 
                         <div class="contenedor-input">
                             <label>
                                 Apellido <span class="req">*</span>
                             </label>
-                            <input type="text" required>
+                            <input type="text" v-model="apellido" required>
                         </div>
                     </div>
                     <div class="contenedor-input">
-                        <label>
-                            Usuario <span class="req">*</span>
-                        </label>
-                        <input type="text" required>
+                      <select v-model="sector" id="category">
+                        <option value="Moda y Comercio" selected>Moda/Comercio</option>
+                        <option value="Hosteleria">Hosteleria</option>
+                        <option value="Carpinteria">Carpinteria</option>
+                        <option value="Electricidad y Fontaneria">Electricidad y Fontaneria</option>
+                        <option value="Metal">Metal</option>
+                      </select>
                     </div>
                     <div class="contenedor-input">
                             <label>
                                 Email <span class="req">*</span>
                             </label>
-                        <input type="email" required>
+                        <input type="email" v-model="email" required>
+                    </div>
+                    <div class="contenedor-input">
+                            <label>
+                                Phone <span class="req">*</span>
+                            </label>
+                        <input type="number" v-model="phone" required>
                     </div>
                     <div class="contenedor-input">
                         <label>
                             Contraseña <span class="req">*</span>
                         </label>
-                        <input type="password" required>
+                        <input type="password" v-model="password" required>
                     </div>
 
-                    <div class="contenedor-input">
-                        <label>
-                            Repetir Contraseña <span class="req">*</span>
-                        </label>
-                        <input type="password" required>
-                    </div>
 
                     <input type="submit" class="button button-block" value="Registrarse">
                 </form>
@@ -91,6 +94,66 @@
 </template>
 <script setup>
 import { onMounted } from 'vue';
+import { ref } from 'vue';
+import axios from 'axios';  
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+// Log In
+const user_email = ref('');
+const user_password =ref('');
+
+const iniciarSesion = async (user_email, user_password) => {
+  try {
+    const response = await axios.post('http://localhost:5000/login', {
+      email: user_email.value,
+      password: user_password.value
+    });
+
+    // Manejar la respuesta del backend
+    const { data } = response;
+    if (data.success) {
+      // El inicio de sesión fue exitoso, realizar acciones necesarias
+      // por ejemplo, redirigir a una página principal
+      window.location.href = '/logIn';
+    } else {
+      // El inicio de sesión falló, mostrar mensaje de error
+      console.log(data.message);
+    }
+  } catch (error) {
+    // Manejar el error de la solicitud
+    console.error(error);
+  }
+};
+
+const nombre = ref('');
+const apellido = ref('');
+const sector = ref('');
+const email = ref('');
+const phone = ref('');
+const password = ref('');
+
+
+const createUsuario = async () => {
+
+try {
+ await axios.post("http://127.0.0.1:5000/register", {
+    firstname: nombre.value,
+    lastname: apellido.value,
+    sector: sector.value,
+    email: email.value,
+    password: password.value,
+    phone: phone.value,
+    penascales: 10
+  });
+  // console.log('name', nombre.value);
+  router.push({ name: 'User' });
+} catch (error) {
+  console.log(error);
+}
+router.push('/user');
+}
 
 const changeForm = (target) => {
   const tabContents = document.querySelectorAll('.contenido-tab > div');
