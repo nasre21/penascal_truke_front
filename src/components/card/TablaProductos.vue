@@ -11,15 +11,15 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody v-for="data in dataInfo.data" :key="data.id">
+        <tbody v-for="data in dataInfo.data" :key="data.idproduct">
           <tr>
             <td><img src="" alt="Foto del producto"></td>
             <td>{{ data.name }}</td>
             <td>{{ data.description }}</td>
             <td>{{ data.price }}</td>
             <td>
-              <span @click="editarProducto(index)"><i class="fas fa-edit"></i></span>
-              <span @click="borrarProducto(index)"><i class="fas fa-trash"></i></span>
+              <span @click="editarProducto()"><i class="fas fa-edit"></i></span>
+              <span @click="borrarProducto(data.idproduct)"><i class="fas fa-trash"></i></span>
             </td>
           </tr>
         </tbody>
@@ -30,19 +30,53 @@
   
   <script setup>
  
-import {defineProps} from 'vue'
+import {defineProps, ref} from 'vue'
 
 
 defineProps({
     dataInfo: Object
   })
 
-  const editarProducto = (index) => {
-    console.log(index)
+
+
+
+  const editarProducto = (id) => {
+    console.log(id)
   }
-  const borrarProducto = (index) => {
-    console.log(index)
-  }
+
+const idProduct = ref("")
+const files = ref("")
+const name = ref("")
+const description = ref("")
+const price = ref("")
+const category = ref("")
+
+let isError = ref(false)
+
+
+
+  // Delete Product
+   const borrarProducto = async(idproduct) => {
+    idProduct.value = idproduct
+    console.log("idProduct", idProduct.value)
+    try {
+           await axios.delete(`http://127.0.0.1:5000/product/${idproduct}`)
+            location.reload()
+            
+        }catch(error){
+
+            isError = true
+
+        }return {
+
+            isError
+        }
+    /*  PARA ENVIAR EMITS */
+    // emit("idDeleteTask", id)
+    // emit("mailDeleteTask", mail)
+}
+
+
 </script>
   
   <style>
