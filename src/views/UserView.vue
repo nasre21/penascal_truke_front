@@ -1,8 +1,23 @@
 <template>
+    <div>
     <navBar />
+    </div>
+    <div>
+        <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
+        <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
+    <div>
     <DatosPersonalesUser :dataInfo = "dataInfo" />
-    <tablaComprado :dataInfo = "dataInfo" />
+    </div>
+    </div>
+
+    <div>
+    <tablaComprado />
+    </div>
+
+    <div>
     <footerFront />
+    </div>
+
 </template>
 
 <script setup> 

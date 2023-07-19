@@ -34,28 +34,38 @@
   
   <script setup>
   import { ref } from 'vue';
-  
-  const users = ref([
-    {
-      foto: 'ruta/a/foto1.jpg',
-      id: 1,
-      nombre: 'Nombre 1',
-      apellido: 'Apellido 1',
-      email: 'correo1@example.com',
-      telefono: '123456789',
-      sector: 'Peñascales 1'
-    },
-    {
-      foto: 'ruta/a/foto2.jpg',
-      id: 2,
-      nombre: 'Nombre 2',
-      apellido: 'Apellido 2',
-      email: 'correo2@example.com',
-      telefono: '987654321',
-      sector: 'Peñascales 2'
-    },
-    // Agrega más usuarios aquí
-  ]);
+
+  defineProps({
+    dataUser: Object
+  })
+
+  const editarProducto = (index) => {
+    console.log(index)
+  }
+  const borrarProducto = (index) => {
+    console.log(index)
+  }
+  // const users = ref([
+  //   {
+  //     foto: 'ruta/a/foto1.jpg',
+  //     id: 1,
+  //     nombre: 'Nombre 1',
+  //     apellido: 'Apellido 1',
+  //     email: 'correo1@example.com',
+  //     telefono: '123456789',
+  //     sector: 'Peñascales 1'
+  //   },
+  //   {
+  //     foto: 'ruta/a/foto2.jpg',
+  //     id: 2,
+  //     nombre: 'Nombre 2',
+  //     apellido: 'Apellido 2',
+  //     email: 'correo2@example.com',
+  //     telefono: '987654321',
+  //     sector: 'Peñascales 2'
+  //   },
+  //   // Agrega más usuarios aquí
+  // ]);
   
   function editarUsuario(index) {
     // Lógica para editar el usuario seleccionado
