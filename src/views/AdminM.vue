@@ -48,6 +48,7 @@ let dataInfo = ref(onMounted(
 
 
 import admin from "@/dataInfo/getAdmin"
+
 let dataAdmin = ref(onMounted(
     async () => {
     dataAdmin.value = await admin.getAdmin()

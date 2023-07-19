@@ -104,26 +104,58 @@ const router = useRouter();
 const user_email = ref('');
 const user_password =ref('');
 
-const iniciarSesion = async (user_email, user_password) => {
-  try {
-    const response = await axios.post('http://localhost:5000/login', {
-      email: user_email.value,
-      password: user_password.value
-    });
 
-    // Manejar la respuesta del backend
-    const { data } = response;
-    if (data.success) {
-      // El inicio de sesión fue exitoso, realizar acciones necesarias
-      // por ejemplo, redirigir a una página principal
-      window.location.href = '/logIn';
-    } else {
-      // El inicio de sesión falló, mostrar mensaje de error
-      console.log(data.message);
+const iniciarSesion = async () => {
+  if (user_email.value == "admin@grupopenascal.com"){
+    try {
+      const responseAdmin = await axios.post('http://127.0.0.1:5000/admin', {
+        email: user_email.value,
+        password: user_password.value,
+      });
+
+    const data = responseAdmin.data;
+
+      if (data === 'Login successful') {
+        // Inicio de sesión exitoso
+        console.log('Inicio de sesión exitoso');
+        // Resto del código para realizar acciones adicionales después del inicio de sesión exitoso
+      } else if (data === 'Login failed') {
+        // Credenciales inválidas
+        console.log('Credenciales inválidas. Inténtalo de nuevo.');
+      } else if (data === 'Admin not found') {
+        // Admininstrador no encontrado
+        console.log('Admininstrador no encontrado.');
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    // Manejar el error de la solicitud
-    console.error(error);
+    router.push('/admin');
+      } 
+    else {
+      
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/login', {
+        email: user_email.value,
+        password: user_password.value,
+      });
+  
+      const data = response.data;
+  
+      if (data === 'Login successful') {
+        // Inicio de sesión exitoso
+        console.log('Inicio de sesión exitoso');
+        // Resto del código para realizar acciones adicionales después del inicio de sesión exitoso
+      } else if (data === 'Login failed') {
+        // Credenciales inválidas
+        console.log('Credenciales inválidas. Inténtalo de nuevo.');
+      } else if (data === 'User not found') {
+        // Usuario no encontrado
+        console.log('Usuario no encontrado.');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    router.push('/user');
   }
 };
 
