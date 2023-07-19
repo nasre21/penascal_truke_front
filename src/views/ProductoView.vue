@@ -29,6 +29,4 @@ function handleProductoSeleccionado(idProducto) {
   console.log('Producto seleccionado:', idProducto);
 }
 
-
-
 </script>
