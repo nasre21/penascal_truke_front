@@ -1,6 +1,13 @@
 <template>
     <navBar />
-    <DatosPersonales />  
+
+    <div>
+    <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
+    <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
+    <div>
+      <DatosPersonales :dataAdmin="dataAdmin" />
+    </div>
+  </div>
     <div>
         <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
         <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
@@ -42,24 +49,37 @@ let dataInfo = ref(onMounted(
     if( !dataInfo.value.isLoading){
       isLoading.value = false
     }
-
 }))
 
 //DataUser
-import User from "@/dataInfo/getUser"
-
+import user from "@/dataInfo/getUser"
 
 
 // let isLoading = ref(true) 
 
 let dataUser = ref(onMounted(
     async () => {
-    dataUser.value = await info.getUser()
+    dataUser.value = await user.getUser()
     if( !dataUser.value.isLoading){
       isLoading.value = false
     }
 
 }))
+
+
+import admin from "@/dataInfo/getAdmin"
+
+let dataAdmin = ref(onMounted(
+    async () => {
+    dataAdmin.value = await admin.getAdmin()
+    if( !dataAdmin.value.isLoading){
+      isLoading.value = false
+    }
+
+}))
+
+
+
 
 
 

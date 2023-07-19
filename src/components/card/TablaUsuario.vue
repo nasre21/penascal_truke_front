@@ -1,5 +1,6 @@
 <template>
     <div class="user-table todo">
+      <h3>Usuarios</h3>
       <table>
         <thead>
           <tr>

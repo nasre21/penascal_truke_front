@@ -1,5 +1,7 @@
 <template>
+ 
     <div class="product-form justify-content-around shadow-box">
+       <h3>Formulario productos</h3>
       <form @submit.prevent="createProducto" class="d-flex">
         <div class="form-column">
           <div class="form-group">
