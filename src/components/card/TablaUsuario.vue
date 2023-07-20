@@ -4,31 +4,43 @@
       <table>
         <thead>
           <tr>
-            <th>Foto</th>
-            <th>ID</th>
-            <th>Nombre</th>
             <th>Apellido</th>
-            <th>Email</th>
+            <th>Nombre</th>
             <th>Teléfono</th>
-            <th>Sector Peñascales</th>
+            <th>Sector</th>
+            <th>Peñascales</th>
+            <th>Email</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="data in dataUser.data" :key="data">
-            <td><img src="" alt="Foto del usuario"></td>
-            <td>{{ data.lastname }}</td>
-            <td>{{ data.firstname }}</td>
-            <td>{{ data.phone }}</td>
-            <td>{{ data.sector }}</td>
-            <td>{{ data.penascales }}</td>
-            <td>{{ data.email }}</td>
-            <td>
-              <span @click="editarUsuario(data.iduser)"><i class="fas fa-edit"></i></span>
-              <span @click="deleteUser(data.iduser)"><i class="fas fa-trash"></i></span>
-            </td>
-          </tr>
-        </tbody>
+  <tr v-for="data in dataUser.data" :key="data.iduser">
+    <!-- <td><img src="" alt="Foto del usuario"></td> -->
+    <td>{{ data.lastname }}</td>
+    <td>{{ data.firstname }}</td>
+    <td>{{ data.phone }}</td>
+    <td>{{ data.sector }}</td>
+    <td>{{ data.penascales }}</td>
+    <td>{{ data.email }}</td>
+    <td>
+      <span @click="editarUser(data.iduser)"><i class="fas fa-edit"></i></span>
+      <span @click="deleteUser(data.iduser)"><i class="fas fa-trash"></i></span>
+    </td>
+  </tr>
+  <tr v-show="hiddenEdit">
+    <td><input v-model="editlastname" type="text"></td>
+    <td><input v-model="editFirstName" type="text"></td>
+    <td><input v-model="editPhone" type="number"></td>
+    <td><input v-model="editSector" type="text"></td>
+    <td><input v-model="editPenascales" type="number"></td>
+    <td><input v-model="editEmail" type="text"></td>
+    <td>
+      <button @click="editarUserForm">Guardar</button>
+      <button @click="cancelEditTask">Cancelar</button>
+    </td>
+  </tr>
+</tbody>
+
       </table>
     </div>
   </template>
@@ -41,19 +53,55 @@
     dataUser: Object
   })
 
-  const imageFiles = ref([]);
+  // const imagenUser = ref([]);
   const idUser = ref('')
-  const editFormName = ref('')
-  const editFormDescription = ref('')
-  const editFormPrice = ref('')
+  const editFirstName = ref('')
+  const editlastname = ref('')
+  const editPhone = ref('')
+  const editSector = ref('')
+  const editPenascales = ref('')
+  const editEmail = ref('')
   const hiddenEdit = ref(false)
   let isError = false
 
 
-  const editarProducto = (index) => {
-
-    console.log(index)
+  const editarUser = (id_edit) => {
+    idUser.value = id_edit
+  hiddenEdit.value = true
+    console.log(id_edit)
   }
+
+   async function editarUserForm(){
+    try{
+      const patchResponse = await axios.patch(`http://127.0.0.1:5000/users/change/${idUser.value}`, {
+      lastname: editlastname.value,
+      firstname: editFirstName.value,
+      phone: editPhone.value,
+      sector: editSector.value,
+      peñascales: editPenascales.value,
+      email: editEmail.value
+    })
+    console.log("esto es respuesta", patchResponse)
+    location.reload()
+    }catch(error){
+      isError = true
+    }
+
+   }
+
+
+
+  const cancelEditTask = () => {
+  idUser.value = ''
+  editFirstName.value = ''
+  editlastname.value = ''
+  editPhone.value = ''
+  editSector.value = ''
+  editPenascales.value = ''
+  editEmail.value = '' 
+  hiddenEdit.value = false
+}
+
   const deleteUser = async (id_user) => {
   idUser.value = id_user
   console.log("esto es producto", idUser.value)
