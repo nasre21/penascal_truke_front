@@ -41,13 +41,10 @@ const routes = [
   },
   {
     path: '/producto/:id',
-    name: 'producto',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    name: 'producto', 
     component: () => import('../views/ProductoView.vue'),
-    props: true
-  }
+    props: true,
+  },
 ]
 
 const router = createRouter({
