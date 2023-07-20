@@ -7,7 +7,7 @@
           <div class="card-body d-flex justify-content-around">
             <h5 class="card-title">{{ data.name }}</h5>
             <p>{{ data.price }} Peñascales</p>
-            <a class="btn btn-outline-success btn-sm" @click="keepIdProduct(data.idproduct )">Accede al producto</a>
+            <button class="btn btn-outline-success btn-sm" @click="keepIdProduct(data.idproduct)">Accede al producto</button>
           </div>
         </div>
       </div>

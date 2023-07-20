@@ -9,7 +9,7 @@
         <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
         <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
         <div v-if="!dataInfo.isError && !isLoading">
-            <CatalogoImagines :dataInfo = "dataInfo"/>
+            <CatalogoImagines :dataInfo = "dataInfo" @productoSeleccionado="handleProductSelect" />
         </div>
     </div>
     <div>
@@ -41,5 +41,11 @@ let dataInfo = ref(onMounted(
 }))
 
 console.log(dataInfo);
+
+// let handleProductSelect = (idproduct) =>{
+//     console.log("esto es id:home", idproduct)
+//     $router.push({ path: `/producto/${idproduct}` });
+// }
+
 
 </script>
