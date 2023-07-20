@@ -15,17 +15,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(user, index) in users" :key="index">
-            <td><img :src="user.foto" alt="Foto del usuario"></td>
-            <td>{{ user.id }}</td>
-            <td>{{ user.nombre }}</td>
-            <td>{{ user.apellido }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.telefono }}</td>
-            <td>{{ user.sector }}</td>
+          <tr v-for="data in dataUser.data" :key="data">
+            <td><img src="" alt="Foto del usuario"></td>
+            <td>{{ data.lastname }}</td>
+            <td>{{ data.firstname }}</td>
+            <td>{{ data.phone }}</td>
+            <td>{{ data.sector }}</td>
+            <td>{{ data.penascales }}</td>
+            <td>{{ data.email }}</td>
             <td>
-              <span @click="editarUsuario(index)"><i class="fas fa-edit"></i></span>
-              <span @click="borrarUsuario(index)"><i class="fas fa-trash"></i></span>
+              <span @click="editarUsuario(data.iduser)"><i class="fas fa-edit"></i></span>
+              <span @click="deleteUser(data.iduser)"><i class="fas fa-trash"></i></span>
             </td>
           </tr>
         </tbody>
@@ -34,16 +34,36 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref,defineProps } from 'vue';
 
   defineProps({
     dataUser: Object
   })
 
+  const imageFiles = ref([]);
+  const idUser = ref('')
+  const editFormName = ref('')
+  const editFormDescription = ref('')
+  const editFormPrice = ref('')
+  const hiddenEdit = ref(false)
+  let isError = false
+
+
   const editarProducto = (index) => {
+
     console.log(index)
   }
-  const borrarProducto = (index) => {
+  const deleteUser = async(iduser) => {
+    idUser.value = iduser
+    console.log("esto es producto", idUser.value)
+    try {
+    await axios.delete(`http://127.0.0.1:5000/user/delete/${idUser.value}`)
+    location.reload()
+  } catch (error) {
+    isError = true
+  }
+
+
     console.log(index)
   }
   // const users = ref([
@@ -67,14 +87,6 @@
   //   },
   //   // Agrega más usuarios aquí
   // ]);
-  
-  function editarUsuario(index) {
-    // Lógica para editar el usuario seleccionado
-  }
-  
-  function borrarUsuario(index) {
-    // Lógica para borrar el usuario seleccionado
-  }
   </script>
   
   <style>
