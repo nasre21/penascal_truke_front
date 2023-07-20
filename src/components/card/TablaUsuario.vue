@@ -13,8 +13,8 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
-  <tr v-for="data in dataUser.data" :key="data.iduser">
+        <tbody v-for="data in dataUser.data" :key="data.iduser">
+  <tr>
     <!-- <td><img src="" alt="Foto del usuario"></td> -->
     <td>{{ data.lastname }}</td>
     <td>{{ data.firstname }}</td>
@@ -27,7 +27,7 @@
       <span @click="deleteUser(data.iduser)"><i class="fas fa-trash"></i></span>
     </td>
   </tr>
-  <tr v-show="hiddenEdit">
+  <tr v-show="hiddenEdit" v-if="data.iduser == idUser">
     <td><input v-model="editlastname" type="text"></td>
     <td><input v-model="editFirstName" type="text"></td>
     <td><input v-model="editPhone" type="number"></td>
