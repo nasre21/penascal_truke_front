@@ -35,6 +35,7 @@
   
   <script setup>
   import { ref,defineProps } from 'vue';
+  import axios from 'axios';
 
   defineProps({
     dataUser: Object
@@ -53,19 +54,18 @@
 
     console.log(index)
   }
-  const deleteUser = async(iduser) => {
-    idUser.value = iduser
-    console.log("esto es producto", idUser.value)
-    try {
-    await axios.delete(`http://127.0.0.1:5000/user/delete/${idUser.value}`)
+  const deleteUser = async (id_user) => {
+  idUser.value = id_user
+  console.log("esto es producto", idUser.value)
+
+  try {
+    await axios.delete(`http://127.0.0.1:5000/users/delete/${idUser.value}`)
     location.reload()
   } catch (error) {
     isError = true
   }
+}
 
-
-    console.log(index)
-  }
   // const users = ref([
   //   {
   //     foto: 'ruta/a/foto1.jpg',
