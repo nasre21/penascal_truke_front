@@ -31,7 +31,7 @@
   <script setup>
  
 import {defineProps, ref} from 'vue'
-
+import axios from 'axios';
 
 defineProps({
     dataInfo: Object
@@ -56,20 +56,20 @@ let isError = ref(false)
 
 
   // Delete Product
-   const borrarProducto = async(idproduct) => {
+    async function borrarProducto(idproduct) {
     idProduct.value = idproduct
     console.log("idProduct", idProduct.value)
     try {
-           await axios.delete(`http://127.0.0.1:5000/product/${idproduct}`)
+           await axios.delete(`http://127.0.0.1:5000/product/${idProduct.value}`)
             location.reload()
             
         }catch(error){
 
-            isError = true
+            isError.value = true
 
         }return {
 
-            isError
+            isError: isError.value
         }
     /*  PARA ENVIAR EMITS */
     // emit("idDeleteTask", id)
