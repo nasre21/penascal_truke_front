@@ -124,6 +124,8 @@ async function editTaskForm(){
           <th>Foto</th>
           <th>Nombre</th>
           <th>Descripción</th>
+          <th>Categoria</th>
+
           <th>Precio</th>
           <th>Acciones</th>
         </tr>
@@ -134,6 +136,7 @@ async function editTaskForm(){
           <td><img :src="data.photo" alt="Foto del producto"></td>
           <td>{{ data.name }}</td>
           <td>{{ data.description }}</td>
+          <td>{{ data.category }}</td>
           <td>{{ data.price }}</td>
           <td>
             <span @click="editTask(data.idproduct)"><i class="fas fa-edit"></i></span>
