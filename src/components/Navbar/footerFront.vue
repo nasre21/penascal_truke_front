@@ -12,10 +12,13 @@
   </template>
   
   <script setup>
+
+
   
 </script>
   
   <style scoped>
+
   
   .redes-container {
     height: 50px;
