@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody v-for="data in dataUser.data" :key="data.iduser">
-  <tr>
+  <tr >
     <!-- <td><img src="" alt="Foto del usuario"></td> -->
     <td>{{ data.lastname }}</td>
     <td>{{ data.firstname }}</td>
@@ -28,11 +28,11 @@
     </td>
   </tr>
   <tr v-show="hiddenEdit" v-if="data.iduser == idUser">
-    <td><input v-model="editlastname" type="text"></td>
+    <td><input v-model="editLastname" type="text"></td>
     <td><input v-model="editFirstName" type="text"></td>
     <td><input v-model="editPhone" type="number"></td>
     <td><input v-model="editSector" type="text"></td>
-    <td><input v-model="editPenascales" type="number"></td>
+    <td><input v-model="editPenascales" type="text"></td>
     <td><input v-model="editEmail" type="text"></td>
     <td>
       <button @click="editarUserForm">Guardar</button>
@@ -55,8 +55,8 @@
 
   // const imagenUser = ref([]);
   const idUser = ref('')
+  const editLastname = ref('')
   const editFirstName = ref('')
-  const editlastname = ref('')
   const editPhone = ref('')
   const editSector = ref('')
   const editPenascales = ref('')
@@ -74,11 +74,11 @@
    async function editarUserForm(){
     try{
       const patchResponse = await axios.patch(`http://127.0.0.1:5000/users/change/${idUser.value}`, {
-      lastname: editlastname.value,
+      lastname: editLastname.value,
       firstname: editFirstName.value,
       phone: editPhone.value,
       sector: editSector.value,
-      peñascales: editPenascales.value,
+      penascales: editPenascales.value,
       email: editEmail.value
     })
     console.log("esto es respuesta", patchResponse)
