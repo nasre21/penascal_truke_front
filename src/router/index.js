@@ -13,7 +13,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/sobreNosotrosView.vue')
+    component: () => import('../views/sobreNosotrosView.vue')
   },
   {
     path: '/logIn',
@@ -21,7 +21,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/logInView.vue')
+    component: () => import('../views/logInView.vue')
   },
   {
     path: '/admin',
@@ -29,7 +29,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AdminM.vue')
+    component: () => import('../views/AdminM.vue')
   },
   {
     path: '/user',
@@ -37,16 +37,14 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/UserView.vue')
+    component: () => import('../views/UserView.vue')
   },
   {
-    path: '/producto',
-    name: 'producto',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/ProductoView.vue')
-  }
+    path: '/producto/:id',
+    name: 'producto', 
+    component: () => import('../views/ProductoView.vue'),
+    props: true,
+  },
 ]
 
 const router = createRouter({

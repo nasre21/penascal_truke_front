@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <!-- All products -->
+  <div v-show="allProduct" class="container">
     <div class="row">
       <div class="col-md-4" v-for="data in dataInfo.data" :key="data.id">
         <div class="card card_all">
@@ -7,21 +8,43 @@
           <div class="card-body d-flex justify-content-around">
             <h5 class="card-title">{{ data.name }}</h5>
             <p>{{ data.price }} Peñascales</p>
-            <img :src="parseFirstFile(data.files)" alt="Imagen del producto" />
-            <a class="btn btn-outline-success btn-sm" @click="keepIdProduct(data.idproduct )">Accede al producto</a>            
+            <img :src="parseFirstFile(data.files)" alt="Imagen del producto" />          
+            <button class="btn btn-outline-success btn-sm" @click="keepIdProduct(data.idproduct)">Accede al producto</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+<!-- Only products by category -->
+<div v-show="selectCategory" class="container">
+    <div class="row">
+      <div class="col-md-4" v-for="dato in filtrado" :key="dato.id">
+        <div class="card card_all">
+          <img :src="parseFirstFile(dato.files)" alt="Imagen del producto" />
+          <div class="card-body d-flex justify-content-around">
+            <h5 class="card-title">{{ dato.name }}</h5>
+            <p>{{ dato.price }} Peñascales</p>
+            <a class="btn btn-outline-success btn-sm" @click="keepIdProduct(dato.idproduct)">Accede al producto</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{ filtrado }}
 </template>
 
 <script setup>
-import { defineProps, ref, defineEmits  } from 'vue';
+import { defineProps, ref, defineEmits, watch } from 'vue';
 
-const { dataInfo } = defineProps(['dataInfo']);
+const { dataInfo, filtrado } = defineProps(['dataInfo', 'filtrado']);
+
 
 const emit = defineEmits(['productoSeleccionado'])
+
+const allProduct = ref(true)
+const selectCategory = ref(false)
+
 
 function parseFirstFile(filesString) {
   try {
@@ -35,12 +58,19 @@ function parseFirstFile(filesString) {
     return '';
   }
 }
+watch(filtrado, (newValue) => {
+  console.log("esto es filtrado en la home", filtrado);
+  if (filtrado === !!newValue) {
+    allProduct.value = false;
+  } else {
+    selectCategory.value = true;
+  }
+});
 
-function keepIdProduct(idProducto) {
-  console.log("esto es producto value", idProducto);
-  emit('productoSeleccionado', idProducto);
-}
-
+ function keepIdProduct(idProducto) {
+   console.log("esto es producto value", idProducto);
+   emit('productoSeleccionado', idProducto);
+ }
 
 </script>
 
