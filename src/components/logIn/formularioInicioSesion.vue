@@ -143,6 +143,8 @@ const iniciarSesion = async () => {
   
       if (data === 'Login successful') {
         // Inicio de sesión exitoso
+        const id_user = response.data[1]; 
+        console.log('ID del usuario:', id_user);
         console.log('Inicio de sesión exitoso');
         // Resto del código para realizar acciones adicionales después del inicio de sesión exitoso
       } else if (data === 'Login failed') {
