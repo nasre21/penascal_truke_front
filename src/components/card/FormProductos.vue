@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
  
     <div class="product-form justify-content-around shadow-box">
        <h3>Formulario productos</h3>
@@ -17,14 +16,6 @@
             <!-- <label for="foto">Foto:</label> -->
             <input type="file" id="foto" ref="fileInput" multiple @change="handleFiles($event)">
           </div>
-=======
-  <div class="product-form justify-content-around shadow-box">
-    <form @submit.prevent="createProducto" class="d-flex">
-      <div class="form-column">
-        <div class="form-group">
-          <!-- <label for="nombre">Nombre</label> -->
-          <input type="text" id="nombre" v-model="nombre" placeholder="Nombre" required>
->>>>>>> e5ae8a7a64dcdef5cd120f431549964ad858be2f
         </div>
         <div class="form-group">
           <!-- <label for="descripcion">Descripción:</label> -->
@@ -34,7 +25,6 @@
           <!-- <label for="foto">Foto:</label> -->
           <input type="file" id="foto" ref="fileInput" multiple @change="handleFiles($event)">
         </div>
-      </div>
       <div class="form-column">
         <div class="form-group">
           <!-- <label for="vendedor">Vendedor:</label> -->

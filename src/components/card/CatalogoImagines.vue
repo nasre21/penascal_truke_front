@@ -30,8 +30,6 @@
       </div>
     </div>
   </div>
-
-  {{ filtrado }}
 </template>
 
 <script setup>

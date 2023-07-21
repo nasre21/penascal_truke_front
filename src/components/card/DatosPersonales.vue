@@ -27,6 +27,11 @@ defineProps({
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 27rem;
+      height: 10rem;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    margin-top: 2rem;
   }
   
   .personal-details {
