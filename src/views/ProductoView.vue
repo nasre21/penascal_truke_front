@@ -21,6 +21,7 @@
  </template>
  
  <script setup>
+ import Swal from 'sweetalert2';
  import footerFront from "../components/Navbar/footerFront.vue";
  import navBar from "../components/Navbar/navBar.vue";
  
@@ -43,6 +44,30 @@
      console.error(error);
    }
  });
+
+ const addToCart = () => {
+    // Show SweetAlert confirmation
+    Swal.fire({
+      title: 'Acceptar Condiciones',
+      text: '¿Estás seguro de que deseas comprar este producto?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, comprar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed, implement your logic here to add the product to the cart
+        // For example, you can call a function or perform any other operation.
+        // For now, let's display a success message.
+        Swal.fire(
+          '¡Comprado!',
+          'El producto ha sido agregado al carrito.',
+          'success'
+        );
+      }
+    });
+  };
  
  // function parseFirstFile(files) {
  //   // Implementa aquí la lógica para obtener la URL de la primera imagen del producto
