@@ -9,7 +9,7 @@
         <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
         <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
         <div v-if="!dataInfo.isError && !isLoading">
-            <CatalogoImagines :dataInfo = "dataInfo" :filtrado="filtrado"  @productoSeleccionado="productoSeleccionado"/>
+            <CatalogoImagines :dataInfo = "dataInfo" :filtrado="filtrado" @productoSeleccionado="productoSeleccionado"/>
         </div>
     </div>
     <div>
@@ -41,6 +41,21 @@ let dataInfo = ref(onMounted(
 }))
 
 console.log(dataInfo);
+
+const filtrado = ref("")
+
+const handleFilter = (filter) =>{
+        filtrado.value = filter
+        console.log("esto es el array filtrado", filtrado.value)
+        return filtrado
+}
+
+const productoSeleccionado = (idproduct) => {
+    console.log("esto es id product en la home", idproduct)
+    $router.push({ path:`/producto/${idproduct}`, params: { id: idproduct } })
+}
+
+const $router = useRouter();
 
 </script>
 
