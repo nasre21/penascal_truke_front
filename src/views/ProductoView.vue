@@ -5,7 +5,7 @@
        <div>
          <div class="product">
            <div class="product-image">
-             <!-- <img :src="parseFirstFile(dataProduc.files)" alt="Imagen del producto" /> -->
+            <img :src="parseFirstFile(dataProduc.files)" alt="Imagen del producto" />  
            </div>
            <div class="product-details">
              <h5 class="card-title">{{ dataProduc.name }}</h5>
@@ -25,7 +25,7 @@
  import navBar from "../components/Navbar/navBar.vue";
  
  import axios from 'axios';
- import { ref, onMounted, defineProps } from 'vue';
+ import { ref, onMounted, defineProps,emit } from 'vue';
  
  const { id } = defineProps(['id'])
  
@@ -43,7 +43,28 @@
      console.error(error);
    }
  });
+ function parseFirstFile(filesString) {
+  try {
+    const filesArray = JSON.parse(filesString);
+    if (Array.isArray(filesArray) && filesArray.length > 0) {
+      return filesArray[0];
+    }
+    return '';
+  } catch (error) {
+    console.error("Error al analizar los archivos:", error);
+    return '';
+  }
+}
  
+const addToCart = () => {
+    if (dataProduc.value) {
+      // Emitir el evento 'addToCart' y pasar el producto como argumento
+      emit('addToCart', dataProduc.value);
+      // Redirigir a la página del carrito (opcional)
+      redirectTo('/shop');
+    }
+  };
+
  // function parseFirstFile(files) {
  //   // Implementa aquí la lógica para obtener la URL de la primera imagen del producto
  //   // según la estructura de datos que recibes desde el backend.
