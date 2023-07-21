@@ -48,9 +48,9 @@
     <!-- Right elements -->
     <div class="d-flex align-items-center">
       <!-- Icon -->
-      <a class="text-reset me-3" href="#">
+      <router-link to="/shop" class="text-reset me-3">
         <i class="fas fa-shopping-cart"></i>
-      </a>
+      </router-link>
       <!-- Avatar -->
       <div class="dropdown">
         <a

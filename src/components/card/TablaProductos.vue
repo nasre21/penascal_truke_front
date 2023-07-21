@@ -34,7 +34,10 @@
  
 import {defineProps, ref} from 'vue'
 import axios from 'axios';
+<<<<<<< HEAD
 
+=======
+>>>>>>> archi
 
 const idProducto = ref("")
 
@@ -68,19 +71,20 @@ let isError = ref(false)
 
 
   // Delete Product
-   const borrarProducto = async(idproduct) => {
+    async function borrarProducto(idproduct) {
     idProduct.value = idproduct
     console.log("idProduct", idProduct.value)
     try {
-           await axios.delete(`http://127.0.0.1:5000/product/${idproduct}`)
+           await axios.delete(`http://127.0.0.1:5000/product/${idProduct.value}`)
             location.reload()
             
         }catch(error){
 
-            isError = true
+            isError.value = true
 
         }return {
 
+<<<<<<< HEAD
             isError
         }}
 
@@ -91,6 +95,10 @@ function editTask(id, mail, who) {
    mailTask.value = mail
    whoTask.value = who
    hiddenEdit.value = true   
+=======
+            isError: isError.value
+        }
+>>>>>>> archi
     /*  PARA ENVIAR EMITS */
     // emit("idEditTask", id)
     // emit("mailEditTask", mail)
