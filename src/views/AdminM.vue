@@ -17,7 +17,13 @@
     </div>
     
     <FormProductos />
-    <TablaUsuario />
+    <div>
+        <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
+        <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
+    <div>
+    <TablaUsuario :dataUser="dataUser" />
+    </div>
+    </div>
    <footerFront />
 </template>
 
@@ -41,6 +47,20 @@ let dataInfo = ref(onMounted(
     async () => {
     dataInfo.value = await info.getProduct()
     if( !dataInfo.value.isLoading){
+      isLoading.value = false
+    }
+}))
+
+//DataUser
+import user from "@/dataInfo/getUser"
+
+
+// let isLoading = ref(true) 
+
+let dataUser = ref(onMounted(
+    async () => {
+    dataUser.value = await user.getUser()
+    if( !dataUser.value.isLoading){
       isLoading.value = false
     }
 

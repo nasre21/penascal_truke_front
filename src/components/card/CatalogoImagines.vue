@@ -4,10 +4,11 @@
     <div class="row">
       <div class="col-md-4" v-for="data in dataInfo.data" :key="data.id">
         <div class="card card_all">
-          <img :src="parseFirstFile(data.files)" alt="Imagen del producto" />
+         
           <div class="card-body d-flex justify-content-around">
             <h5 class="card-title">{{ data.name }}</h5>
             <p>{{ data.price }} Peñascales</p>
+            <img :src="parseFirstFile(data.files)" alt="Imagen del producto" />          
             <button class="btn btn-outline-success btn-sm" @click="keepIdProduct(data.idproduct)">Accede al producto</button>
           </div>
         </div>
@@ -75,9 +76,30 @@ watch(filtrado, (newValue) => {
 
 <style scoped>
 
+.card-body{
+  flex-wrap: wrap;
+}
+
+.card{
+  width: 20rem;
+  height: 15rem;
+  margin: 1rem;
+  margin-left: 2rem;
+  border: solid 1px black;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+}
+
+.container{
+  width: 1366px;
+  height: 768px;
+  margin-bottom: 3rem;
+
+
+}
+
 img{
-  width:100px;
-  height: 70px;
+  width:10rem;
+  height: 7rem;
 }
 
 </style>
