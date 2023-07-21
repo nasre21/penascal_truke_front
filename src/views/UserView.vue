@@ -1,45 +1,57 @@
 <template>
     <div>
-    <navBar />
+      <navBar />
     </div>
+  
     <div>
-        <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
-        <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
+      <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
+      <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
+      <div v-if="!dataInfo.isError && !isLoading">
+        <DatosPersonalesUser :dataInfo="dataInfo.data" />
+       </div>
+    </div>
+  
     <div>
-    <DatosPersonalesUser :dataInfo = "dataInfo" />
+      <tablaComprado />
     </div>
-    </div>
-
+  
     <div>
-    <tablaComprado />
+      <footerFront />
     </div>
+  </template>
 
-    <div>
-    <footerFront />
-    </div>
+<script setup>
+import navBar from "../components/Navbar/navBar.vue";
+import DatosPersonalesUser from "../components/card/DatosPersonalesUser.vue";
+import tablaComprado from "../components/Tablas/tablaComprado.vue";
+import footerFront from "../components/Navbar/footerFront.vue";
 
-</template>
+import { ref, onBeforeMount } from "vue";
+import { useRoute } from "vue-router"; // Importa useRoute desde vue-router
+import axios from "axios";
 
-<script setup> 
-import navBar from "../components/Navbar/navBar.vue"
-import DatosPersonalesUser from "../components/card/DatosPersonalesUser.vue"
-import tablaComprado from "../components/Tablas/tablaComprado"
-import footerFront from "../components/Navbar/footerFront.vue"
+const isLoading = ref(true);
+const userId = ref(null);
+const id = ref(null);
+const dataInfo = ref({ isError: false, isLoading: true, data: null });
 
+const route = useRoute(); 
 
-import info from "@/dataInfo/getUser.js"
+onBeforeMount(async () => {
+  id.value = route.params.id,
+  userId.value = id.value,
 
+  await fetchData();
+});
 
-import { ref, onMounted } from 'vue';
-
-let isLoading = ref(true) 
-
-let dataInfo = ref(onMounted(async () => {
-    dataInfo.value = await info.getUser()
-    if( !dataInfo.value.isLoading){
-      isLoading.value = false
-    }
-
-}))
-
+async function fetchData() {
+  try {
+    const answer = await axios.get(`http://127.0.0.1:5000/users/${id.value}`);
+    dataInfo.value.data = answer.data;
+    isLoading.value = false;
+  } catch (err) {
+    dataInfo.value.isError = true;
+    isLoading.value = false;
+  }
+}
 </script>

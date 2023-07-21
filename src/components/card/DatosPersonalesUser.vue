@@ -1,36 +1,26 @@
 <template>
-   <div class="shadow-box" v-for="data in dataInfo.data" :key="data.id">
-        <div class="personal-info ms-5">
-        <h2>Datos personales</h2>
-        <div class="personal-details">
-            <img class="avatar" src="../../assets/imgg/pngwing.com.png" alt="Avatar">
-            <div class="info">
-
-            <h5><strong>Nombre</strong>: {{ data.firstname }}</h5>
-            
-            <p><strong>Apellido</strong>:  {{ data.lastname }}</p>
-
-            <p><strong>Sector</strong>:  {{ data.sector }}</p>
-
-            <p><strong>E-mail</strong>:  {{ data.email }}</p>
-
-            <p><strong>Telefono</strong>:  {{ data.phone }}</p>
-
-            <p><strong>Penascales</strong>:  {{ data.penascales }}</p>
-            
-            </div>
+  <div class="shadow-box">
+    <div class="personal-info ms-5">
+      <h2>Datos personales</h2>
+      <div class="personal-details">
+        <img class="avatar" src="../../assets/imgg/pngwing.com.png" alt="Avatar">
+        <div class="info">
+          <h5><strong>Nombre</strong>: {{ dataInfo.firstname }}</h5>
+          <p><strong>Apellido</strong>:  {{ dataInfo.lastname }}</p>
+          <p><strong>Sector</strong>:  {{ dataInfo.sector }}</p>
+          <p><strong>E-mail</strong>:  {{ dataInfo.email }}</p>
+          <p><strong>Telefono</strong>:  {{ dataInfo.phone }}</p>
+          <p><strong>Penascales</strong>:  {{ dataInfo.penascales }}</p>
         </div>
-        </div>
+      </div>
     </div>
-  </template>
+  </div>
+</template>
 
-  <script setup>
-  import { defineProps } from "vue";
+<script setup>
+import { defineProps } from "vue";
 
-  defineProps({
-    dataInfo: Object
-  })
-
+const { dataInfo } = defineProps(["dataInfo"]);
 </script>
   
   <style scoped>

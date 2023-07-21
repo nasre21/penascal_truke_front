@@ -98,7 +98,7 @@ import { ref } from 'vue';
 import axios from 'axios';  
 import { useRouter } from 'vue-router';
 
-const router = useRouter();
+const $router = useRouter();
 
 // Log In
 const user_email = ref('');
@@ -134,30 +134,34 @@ const iniciarSesion = async () => {
     else {
       
     try {
+      console.log("usuario para la base de datos")
       const response = await axios.post('http://127.0.0.1:5000/login', {
         email: user_email.value,
         password: user_password.value,
       });
   
       const data = response.data;
+      console.log("esto es data de loguin", data)
   
-      if (data === 'Login successful') {
+      if (data === data) {
         // Inicio de sesión exitoso
-        const id_user = response.data[1]; 
+        const id_user = data; 
         console.log('ID del usuario:', id_user);
+        const id = id_user['Login successful'] 
         console.log('Inicio de sesión exitoso');
-        // Resto del código para realizar acciones adicionales después del inicio de sesión exitoso
+        $router.push({ path:`/user/${id}`, params: { id } })
+
       } else if (data === 'Login failed') {
         // Credenciales inválidas
         console.log('Credenciales inválidas. Inténtalo de nuevo.');
       } else if (data === 'User not found') {
         // Usuario no encontrado
+        alert("Usuario no encontrado o contraseña no correcta")
         console.log('Usuario no encontrado.');
       }
     } catch (error) {
       console.error(error);
     }
-    router.push('/user');
   }
 };
 
@@ -182,11 +186,11 @@ try {
     penascales: 10
   });
   // console.log('name', nombre.value);
-  router.push({ name: 'User' });
+  router.push({ name: 'logIn' });
 } catch (error) {
   console.log(error);
 }
-router.push('/user');
+router.push('/logIn');
 }
 
 const changeForm = (target) => {

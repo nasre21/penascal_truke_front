@@ -9,7 +9,7 @@ async function getUser(){
       let data = ref('')
 
       try {
-        let answer = await axios.get("http://127.0.0.1:5000/users")
+        let answer = await axios.get(`http://127.0.0.1:5000/user/${id}`)
         data.value = await answer.data
       }
       catch (err) {
