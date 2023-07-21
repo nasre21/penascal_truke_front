@@ -124,6 +124,8 @@ async function editTaskForm(){
           <th>Foto</th>
           <th>Nombre</th>
           <th>Descripción</th>
+          <th>Categoria</th>
+
           <th>Precio</th>
           <th>Acciones</th>
         </tr>
@@ -134,6 +136,7 @@ async function editTaskForm(){
           <td><img :src="data.photo" alt="Foto del producto"></td>
           <td>{{ data.name }}</td>
           <td>{{ data.description }}</td>
+          <td>{{ data.category }}</td>
           <td>{{ data.price }}</td>
           <td>
             <span @click="editTask(data.idproduct)"><i class="fas fa-edit"></i></span>
@@ -187,7 +190,7 @@ const deleteTask = async (id) => {
   console.log("esto es producto", idProducto.value)
 
   try {
-    await axios.delete(`http://127.0.0.1:5000/product/update/${idProducto.value}`)
+    await axios.delete(`http://127.0.0.1:5000/product/delete/${idProducto.value}`)
     location.reload()
   } catch (error) {
     isError = true
@@ -227,6 +230,12 @@ const filePromises = imageFiles.value.map(file => {
   try {
     // Esperar a que todas las promesas de carga de archivos se resuelvan
     const filesData = await Promise.all(filePromises);
+
+    console.log("esto es name", editFormName.value)
+    console.log("esto es description", editFormDescription.value)
+    console.log("esto es price", editFormPrice.value)
+    console.log("esto es id", idProducto.value)
+    console.log("esto es filesData", filesData)
 
     const patchResponse = await axios.patch(`http://127.0.0.1:5000/product/update/${idProducto.value}`, {
       name: editFormName.value,

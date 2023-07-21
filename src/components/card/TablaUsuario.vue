@@ -4,48 +4,116 @@
       <table>
         <thead>
           <tr>
-            <th>Foto</th>
-            <th>ID</th>
-            <th>Nombre</th>
             <th>Apellido</th>
-            <th>Email</th>
+            <th>Nombre</th>
             <th>Teléfono</th>
-            <th>Sector Peñascales</th>
+            <th>Sector</th>
+            <th>Peñascales</th>
+            <th>Email</th>
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="(user, index) in users" :key="index">
-            <td><img :src="user.foto" alt="Foto del usuario"></td>
-            <td>{{ user.id }}</td>
-            <td>{{ user.nombre }}</td>
-            <td>{{ user.apellido }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.telefono }}</td>
-            <td>{{ user.sector }}</td>
-            <td>
-              <span @click="editarUsuario(index)"><i class="fas fa-edit"></i></span>
-              <span @click="borrarUsuario(index)"><i class="fas fa-trash"></i></span>
-            </td>
-          </tr>
-        </tbody>
+        <tbody v-for="data in dataUser.data" :key="data.iduser">
+  <tr >
+    <!-- <td><img src="" alt="Foto del usuario"></td> -->
+    <td>{{ data.lastname }}</td>
+    <td>{{ data.firstname }}</td>
+    <td>{{ data.phone }}</td>
+    <td>{{ data.sector }}</td>
+    <td>{{ data.penascales }}</td>
+    <td>{{ data.email }}</td>
+    <td>
+      <span @click="editarUser(data.iduser)"><i class="fas fa-edit"></i></span>
+      <span @click="deleteUser(data.iduser)"><i class="fas fa-trash"></i></span>
+    </td>
+  </tr>
+  <tr v-show="hiddenEdit" v-if="data.iduser == idUser">
+    <td><input v-model="editLastname" type="text"></td>
+    <td><input v-model="editFirstName" type="text"></td>
+    <td><input v-model="editPhone" type="number"></td>
+    <td><input v-model="editSector" type="text"></td>
+    <td><input v-model="editPenascales" type="text"></td>
+    <td><input v-model="editEmail" type="text"></td>
+    <td>
+      <button @click="editarUserForm">Guardar</button>
+      <button @click="cancelEditTask">Cancelar</button>
+    </td>
+  </tr>
+</tbody>
+
       </table>
     </div>
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref,defineProps } from 'vue';
+  import axios from 'axios';
 
   defineProps({
     dataUser: Object
   })
 
-  const editarProducto = (index) => {
-    console.log(index)
+  // const imagenUser = ref([]);
+  const idUser = ref('')
+  const editLastname = ref('')
+  const editFirstName = ref('')
+  const editPhone = ref('')
+  const editSector = ref('')
+  const editPenascales = ref('')
+  const editEmail = ref('')
+  const hiddenEdit = ref(false)
+  let isError = false
+
+
+  const editarUser = (id_edit) => {
+    idUser.value = id_edit
+  hiddenEdit.value = true
+    console.log(id_edit)
   }
-  const borrarProducto = (index) => {
-    console.log(index)
+
+   async function editarUserForm(){
+    try{
+      const patchResponse = await axios.patch(`http://127.0.0.1:5000/users/change/${idUser.value}`, {
+      lastname: editLastname.value,
+      firstname: editFirstName.value,
+      phone: editPhone.value,
+      sector: editSector.value,
+      penascales: editPenascales.value,
+      email: editEmail.value
+    })
+    console.log("esto es respuesta", patchResponse)
+    location.reload()
+    }catch(error){
+      isError = true
+    }
+
+   }
+
+
+
+  const cancelEditTask = () => {
+  idUser.value = ''
+  editFirstName.value = ''
+  editlastname.value = ''
+  editPhone.value = ''
+  editSector.value = ''
+  editPenascales.value = ''
+  editEmail.value = '' 
+  hiddenEdit.value = false
+}
+
+  const deleteUser = async (id_user) => {
+  idUser.value = id_user
+  console.log("esto es producto", idUser.value)
+
+  try {
+    await axios.delete(`http://127.0.0.1:5000/users/delete/${idUser.value}`)
+    location.reload()
+  } catch (error) {
+    isError = true
   }
+}
+
   // const users = ref([
   //   {
   //     foto: 'ruta/a/foto1.jpg',
@@ -67,14 +135,6 @@
   //   },
   //   // Agrega más usuarios aquí
   // ]);
-  
-  function editarUsuario(index) {
-    // Lógica para editar el usuario seleccionado
-  }
-  
-  function borrarUsuario(index) {
-    // Lógica para borrar el usuario seleccionado
-  }
   </script>
   
   <style>
