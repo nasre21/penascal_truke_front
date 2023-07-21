@@ -6,7 +6,7 @@
       <div class="product-details">
         <h3>{{ product.nombre }}</h3>
         <p>{{ product.descripcion }}</p>
-        <button @click="addToCart" class="buy-button">
+        <button @click="addToCart (dato.idproduct)" class="buy-button">
           Comprar <i class="fas fa-cart-plus"></i>
         </button>
       </div>
@@ -14,6 +14,7 @@
   </template>
   
   <script>
+  import Swal from 'sweetalert2';
   export default {
     props: {
       product: {
@@ -27,6 +28,24 @@
       },
     },
   };
+
+  const addToCart = (idroduct) => {
+  Swal.fire({
+    title: 'Condiciones de Aceptación',
+    text: 'Aquí van las condiciones que el usuario debe aceptar para acceder al producto.',
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: 'Aceptar',
+    cancelButtonText: 'Cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Aquí puedes redirigir al usuario al producto o ejecutar la acción deseada después de que el usuario acepte las condiciones.
+      console.log('Usuario aceptó las condiciones y accedió al producto');
+    } else {
+      console.log('Usuario canceló');
+    }
+  });
+};
   </script>
   
   <style scoped>
