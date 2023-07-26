@@ -45,10 +45,6 @@
      console.error(error);
    }
  });
-<<<<<<< HEAD
-=======
-
->>>>>>> structure
  function parseFirstFile(filesString) {
   try {
     const filesArray = JSON.parse(filesString);
@@ -62,7 +58,6 @@
   }
 }
  
-<<<<<<< HEAD
 const addToCart = () => {
     if (dataProduc.value) {
       // Emitir el evento 'addToCart' y pasar el producto como argumento
@@ -77,9 +72,6 @@ const addToCart = () => {
  //   // según la estructura de datos que recibes desde el backend.
  //   // Asegúrate de que esta función esté implementada correctamente.
  // }
-=======
-
->>>>>>> structure
  </script>
  <style scoped >
 img{
