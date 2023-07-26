@@ -20,17 +20,13 @@
                 <h1>Iniciar Sesión</h1>
                 <form @submit.prevent="iniciarSesion" action="#" method="post">
                     <div class="contenedor-input">
-                        <label>
-                            Email <span class="req">*</span>
-                        </label>
-                        <input v-model="user_email" type="text" required>
+                        
+                        <input v-model="user_email" type="text" required placeholder="Escribe tu correo electrónico aquí*">
                     </div>
 
                     <div class="contenedor-input">
-                        <label>
-                            Contraseña <span class="req">*</span>
-                        </label>
-                        <input v-model="user_password" type="password" required>
+                       
+                        <input v-model="user_password" type="password" required placeholder="Escribe tu contraseña aquí*">
                     </div>
                     <!-- <p class="forgot"><a href="#">Se te olvidó la contraseña?</a></p> -->
                     <input type="submit" class="button button-block" value="Iniciar Sesión">
@@ -43,21 +39,20 @@
                 <form @submit.prevent="createUsuario" action="#" method="post" >
                     <div class="fila-arriba">
                         <div class="contenedor-input">
-                            <label>
-                                Nombre <span class="req">*</span>
-                            </label>
-                            <input type="text" v-model="nombre" required >
+                            
+                            <input type="text" v-model="nombre" required placeholder="Escribe tu nombre aquí*" >
                         </div>
 
                         <div class="contenedor-input">
-                            <label>
-                                Apellido <span class="req">*</span>
-                            </label>
-                            <input type="text" v-model="apellido" required>
+                           
+                            <input type="text" v-model="apellido" required placeholder="Escribe tu apellido aquí*">
                         </div>
                     </div>
+                    
                     <div class="contenedor-input">
+                      <label class="seleccionaSector" >Selecciona tu sector</label>
                       <select v-model="sector" id="category">
+                        
                         <option value="Moda y Comercio" selected>Moda/Comercio</option>
                         <option value="Hosteleria">Hosteleria</option>
                         <option value="Carpinteria">Carpinteria</option>
@@ -66,22 +61,16 @@
                       </select>
                     </div>
                     <div class="contenedor-input">
-                            <label>
-                                Email <span class="req">*</span>
-                            </label>
-                        <input type="email" v-model="email" required>
+                            
+                        <input type="email" v-model="email" required placeholder="Escribe tu correo electrónico aquí*">
                     </div>
                     <div class="contenedor-input">
-                            <label>
-                                Phone <span class="req">*</span>
-                            </label>
-                        <input type="number" v-model="phone" required>
+                           
+                        <input type="text" v-model="phone" required placeholder="Escribe tu numero de telefono aquí*">
                     </div>
                     <div class="contenedor-input">
-                        <label>
-                            Contraseña <span class="req">*</span>
-                        </label>
-                        <input type="password" v-model="password" required>
+                       
+                        <input type="password" v-model="password" required placeholder="Escribe tu contraseña aquí*">
                     </div>
 
 
@@ -231,6 +220,10 @@ onMounted(intercambiarColores);
 </script>
 
 <style scoped >
+
+.seleccionaSector{
+  margin: 1rem;  
+}
 /* Estilos para el encabezado */
 
 body {
@@ -298,6 +291,7 @@ h1 {
 }
 
 label {
+ 
   position: absolute;
   transform: translateY(6px);
   left: 13px;
