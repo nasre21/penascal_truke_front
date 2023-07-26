@@ -1,19 +1,15 @@
 # penascal_truke_front
 
-## Project setup
-```
-npm install
-```
+# Description:
+ "Peñascal Truke is an innovative e-commerce platform built using Vue 3 and Python, with a MySQL database backend. Designed exclusively for the members of the Peñascal cooperative, it serves as a virtual marketplace, facilitating buying and selling of products within the cooperative community.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+ With a user-friendly interface, members can easily list their products for sale, browse items from other members, and engage in seamless transactions. 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+ Peñascal Truke promotes sustainable and local commerce, fostering a sense of community and collaboration among its users. 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+ Experience the convenience of a virtual marketplace while supporting the cooperative's local economy and sustainable practices on Peñascal Truke."
+
+# To open the project:
+
+npm run serve 
+
