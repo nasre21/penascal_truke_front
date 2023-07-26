@@ -17,7 +17,7 @@
      <div> 
       <tablaComprado :dataCompras="dataCompras"/>
     </div>
-    
+
     </div>
   
     <div>
@@ -31,7 +31,7 @@ import DatosPersonalesUser from "../components/card/DatosPersonalesUser.vue";
 import tablaComprado from "../components/Tablas/tablaComprado.vue";
 import footerFront from "../components/Navbar/footerFront.vue";
 
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, onMounted } from "vue";
 import { useRoute } from "vue-router"; // Importa useRoute desde vue-router
 import axios from "axios";
 
