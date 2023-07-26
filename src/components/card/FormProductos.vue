@@ -112,7 +112,7 @@ try {
 
 </script>
 
-<style>
+<style scoped>
 .product-form {
   display: flex;
   flex-wrap: wrap;
