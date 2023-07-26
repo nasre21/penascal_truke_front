@@ -12,7 +12,12 @@
     </div>
   
     <div>
-      <tablaComprado />
+      <img src="@/assets/images/error.png" alt="" v-if="dataInfo.isError">
+      <img src="@/assets/images/1488.gif" alt="" v-if="isLoading">
+     <div> 
+      <tablaComprado :dataCompras="dataCompras"/>
+    </div>
+    
     </div>
   
     <div>
@@ -54,4 +59,15 @@ async function fetchData() {
     isLoading.value = false;
   }
 }
+
+
+import compras from "@/dataInfo/getCompras"
+
+let dataCompras = ref(onMounted(
+    async () => {
+    dataCompras.value = await compras.getCompras()
+    if( !dataCompras.value.isLoading){
+      isLoading.value = false
+    }
+}))
 </script>
