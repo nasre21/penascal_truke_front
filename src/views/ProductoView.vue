@@ -1,29 +1,30 @@
 <template>
-  <div>
-    <navBar />
-    <div class="cajadetalles" v-if="dataProduc">
-      <div>
-        <div class="product">
-          <div class="product-details">
-             <h5 class="card-title">{{ dataProduc.name }}</h5>
-             <p>{{ dataProduc.description }}</p>
-             <strong><p>{{ dataProduc.price }} Peñascales</p></strong>
-             <img class="fotodetalles" :src="parseFirstFile(dataProduc.photo)" alt="Imagen del producto" /> 
-             <div class="product-image">              
-               <button @click="addToCart" class="buy-button">Comprar <i class="fas fa-cart-plus"></i></button>         
-             </div>             
-          </div> 
+   <div>
+     <navBar />
+     <div class="cajadetalles" v-if="dataProduc">
+       <div>
+         <div class="product">
+           <div class="product-details">
+              <h5 class="card-title">{{ dataProduc.name }}</h5>
+              <p>{{ dataProduc.description }}</p>
+              <strong><p>{{ dataProduc.price }} Peñascales</p></strong>
+              <img class="fotodetalles" :src="parseFirstFile(dataProduc.photo)" alt="Imagen del producto" /> 
+              <div class="product-image">              
+                <button @click="addToCart" class="buy-button">Comprar <i class="fas fa-cart-plus"></i></button>         
+              </div>             
+           </div> 
 
-        </div>
-      </div>
-    </div>
-    <footerFront />
-  </div>
+         </div>
+       </div>
+     </div>
+     <footerFront />
+   </div>
 
-</template>
+ </template>
  
  <script setup>
-  import footerFront from "../components/Navbar/footerFront.vue";
+ import Swal from 'sweetalert2';
+ import footerFront from "../components/Navbar/footerFront.vue";
  import navBar from "../components/Navbar/navBar.vue";
  
  import axios from 'axios';
@@ -58,7 +59,28 @@
   }
 }
 
-const addToCart = () => {
+ const addToCart = () => {
+    // Show SweetAlert confirmation
+    Swal.fire({
+      title: 'Acceptar Condiciones',
+      text: '¿Estás seguro de que deseas comprar este producto?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, comprar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed, implement your logic here to add the product to the cart
+        // For example, you can call a function or perform any other operation.
+        // For now, let's display a success message.
+        Swal.fire(
+          '¡Comprado!',
+          'El producto ha sido agregado al carrito.',
+          'success'
+        );
+      }
+    });
     if (dataProduc.value) {
       // Emitir el evento 'addToCart' y pasar el producto como argumento
       emit('addToCart', dataProduc.value);
