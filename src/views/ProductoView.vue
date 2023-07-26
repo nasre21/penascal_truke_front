@@ -10,7 +10,7 @@
               <strong><p>{{ dataProduc.price }} Peñascales</p></strong>
               <img class="fotodetalles" :src="parseFirstFile(dataProduc.photo)" alt="Imagen del producto" /> 
               <div class="product-image">              
-                <button @click="addToCart" class="buy-button">Comprar <i class="fas fa-cart-plus"></i></button>         
+                <button @click="addToCart()" class="buy-button">Comprar<i class="fas fa-cart-plus"></i></button>         
               </div>             
            </div> 
 
@@ -28,9 +28,12 @@
  import navBar from "../components/Navbar/navBar.vue";
  
  import axios from 'axios';
- import { ref, onMounted, defineProps,emit } from 'vue';
+ import { useRouter } from 'vue-router';
+ import { ref, onMounted, defineProps} from 'vue';
  
  const { id } = defineProps(['id'])
+
+ const $router = useRouter();
  
   const dataProduc = ref(null);
  
@@ -46,6 +49,7 @@
      console.error(error);
    }
  });
+
  function parseFirstFile(filesString) {
   try {
     const filesArray = JSON.parse(filesString);
@@ -71,22 +75,16 @@
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        // User confirmed, implement your logic here to add the product to the cart
-        // For example, you can call a function or perform any other operation.
-        // For now, let's display a success message.
         Swal.fire(
           '¡Comprado!',
           'El producto ha sido agregado al carrito.',
           'success'
         );
+      // Esta redirección no es dinámica, se debería cambiar con el id del usuario
+        $router.push({ name: 'user', params: { id: 50 } });
+
       }
     });
-    if (dataProduc.value) {
-      // Emitir el evento 'addToCart' y pasar el producto como argumento
-      emit('addToCart', dataProduc.value);
-      // Redirigir a la página del carrito (opcional)
-      redirectTo('/shop');
-    }
   };
   
  </script>

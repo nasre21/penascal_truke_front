@@ -99,7 +99,7 @@
       </div>
       <div v-else>
         <!-- Si no hay productos filtrados, muestra un mensaje -->
-        <p>No hay productos disponibles para esta categoría.</p>
+        <!-- <p>No hay productos disponibles para esta categoría.</p> -->
       </div>
     </div>
   </template>
